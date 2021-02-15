@@ -1,17 +1,10 @@
 from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
 
 from kivymd.app import MDApp
 from kivymd.theming import ThemeManager
 
-class ListView():
-    def __init__(self, x):
-        x = 1
-
-    def change_text(self, t):
-        t.text = "CHANGED!"
-
 class MainController(MDApp):
-    ListViewController = ListView(1)
     def build(self):
         self.title = 'ECM2429 Assignment'
         self.theme_cls = ThemeManager()
@@ -20,8 +13,5 @@ class MainController(MDApp):
     
     def show_home(self, screen_manager):
         screen_manager.current = "HomeScreen"
-    
-    def change_text(self):
-       print("hehehe")
 
 MainController().run()

@@ -1,13 +1,13 @@
 #:kivy 2.0.0
-#:import ListView Controllers.ListView.ListView
+#:import ListViewController Controllers.ListViewController.ListViewController
 <ListView@MDScreen>:
     MDBoxLayout:
         orientation: "vertical"
 
         MDLabel:
-            id: "t"
+            id: labelName
             text: "name"
             
         Button:
             text: "press me"
-            on_press: ListView.change_text(self)
+            on_press: ListViewController.change_text(labelName)
