@@ -1,0 +1,70 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:include Views/ListView.kv
+
+MDBoxLayout:
+    orientation: "vertical"
+
+    MDToolbar:
+        title: app.title
+        md_bg_color: app.theme_cls.primary_color
+        left_action_items: [["home", lambda x: app.show_home(screen_manager)]]
+
+    MDBoxLayout:
+        MDNavigationRail:
+            id: rail
+            md_bg_color: app.theme_cls.primary_color
+
+            MDNavigationRailItem:
+                icon: "list-status"
+                #text: "Prepare list" #of items to be picked and dispatched"
+                on_release: screen_manager.current = "ListScreen"
+                selected: "true"
+
+            MDNavigationRailItem:
+                icon: "cube-send"
+                #text: "Prepare the shipment" #a packing list to include in shipment 
+                on_release: screen_manager.current = "SendScreen"
+
+            MDNavigationRailItem:
+                icon: "printer"
+                #text: "Prepare/ print custom address labels"
+                on_release: screen_manager.current = "PrintScreen"
+
+            MDNavigationRailItem:
+                icon: "email"
+                #text: "Prepare e-mail messages" #to notify customers of their order status, e.g. posted
+                on_release: screen_manager.current = "EmailScreen"
+                
+            MDNavigationRailItem:
+                icon: "message"
+                #text: "Prepare standard/ personalised e-mail"
+                on_release: screen_manager.current = "MessageScreen"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            ScreenManager:
+                id: screen_manager
+                Screen:
+                    name: "HomeScreen"
+                    MDLabel:
+                        text: "Log in screen?"
+                Screen:
+                    name: "ListScreen"
+                    ListView:
+                Screen:
+                    name: "SendScreen"
+                    MDLabel:
+                        text: "Send Screen"
+                Screen:
+                    name: "PrintScreen"
+                    MDLabel:
+                        text: "Print Screen"
+                Screen:
+                    name: "EmailScreen"
+                    MDLabel:
+                        text: "Email Screen"
+                Screen:
+                    name: "MessageScreen"
+                    MDLabel:
+                        text: "Message Screen"
