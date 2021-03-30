@@ -1,6 +1,7 @@
 #:kivy 2.0.0
 #:import get_color_from_hex kivy.utils.get_color_from_hex
-#:include Views/ListView.kv
+
+#: import PickingListView ViewModels.PickingListViewModel.PickingListScreen
 
 MDBoxLayout:
     orientation: "vertical"
@@ -18,8 +19,9 @@ MDBoxLayout:
             MDNavigationRailItem:
                 icon: "list-status"
                 #text: "Prepare list" #of items to be picked and dispatched"
-                on_release: screen_manager.current = "ListScreen"
-                selected: "true"
+                on_release: 
+                    screen_manager.transition.direction = "right"
+                    screen_manager.current = "PickingListScreen"
 
             MDNavigationRailItem:
                 icon: "cube-send"
@@ -49,21 +51,25 @@ MDBoxLayout:
                     name: "HomeScreen"
                     MDLabel:
                         text: "Log in screen?"
-                Screen:
-                    name: "ListScreen"
-                    ListView:
+
+                PickingListScreen:
+                    name: "PickingListScreen"
+
                 Screen:
                     name: "SendScreen"
                     MDLabel:
                         text: "Send Screen"
+
                 Screen:
                     name: "PrintScreen"
                     MDLabel:
                         text: "Print Screen"
+
                 Screen:
                     name: "EmailScreen"
                     MDLabel:
                         text: "Email Screen"
+
                 Screen:
                     name: "MessageScreen"
                     MDLabel:
