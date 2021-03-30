@@ -23,7 +23,7 @@ class PickingListScreen(MDScreen):
                 list_item = OneLineListItem(
                     text=i, divider="Inset", font_style="H6"
                 )
-                self.ids._list.add_widget(list_item)
+                self.ids.picking_list.add_widget(list_item)
             self.list_created = True
 
     
