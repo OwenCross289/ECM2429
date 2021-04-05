@@ -3,14 +3,14 @@ from kivymd.uix.list import OneLineListItem
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 from Models.Order import Order
-import Database.DatabaseHandler
+import Database.DatabaseHandler as db
 
 class PickingListScreen(MDScreen):
     list_created = BooleanProperty(False)
 
     def on_pre_enter(self):
         #Bind this list up to your list of objects to be picked then go to an individual item screen on click
-        order = Database.DatabaseHandler.get_order(1)
+        order = db.get_order(1)
         if not self.list_created:
             items = [
                 "Manage accounts",
