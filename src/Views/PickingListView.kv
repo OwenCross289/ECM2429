@@ -1,6 +1,22 @@
 #:kivy 2.0.0
 <PickingListScreen>:
-    ScrollView:
 
-        MDList:
-            id: picking_list
+    MDGridLayout:
+        rows: 3
+        spacing: 5, 5
+        padding: 5, 5
+
+        MDLabel:
+            id: screen_descriptor
+            text: "On this screen you can see all of the orders with the status ready. By clicking an order you can view more about it and change it's status"
+            size_hint_y: 0.1
+
+        ScrollView:
+            MDList:
+                id: picking_list
+
+        MDRaisedButton:
+            id: refresh_btn
+            text: "Refresh Orders"
+            size_hint_y: 0.1
+            on_press: root.refresh_button_clicked()

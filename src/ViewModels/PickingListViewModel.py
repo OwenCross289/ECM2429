@@ -1,6 +1,7 @@
 from kivy.properties import BooleanProperty
 from kivymd.uix.list import OneLineListItem
 from kivymd.uix.screen import MDScreen
+from kivymd.toast import toast
 
 class PickingListScreen(MDScreen):
     list_created = BooleanProperty(False)
@@ -25,5 +26,9 @@ class PickingListScreen(MDScreen):
                 )
                 self.ids.picking_list.add_widget(list_item)
             self.list_created = True
+    
+
+    def refresh_button_clicked(self):
+        toast("Current ready orders have been refreshed")
 
     
