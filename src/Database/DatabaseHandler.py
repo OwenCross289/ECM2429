@@ -77,15 +77,21 @@ def get_order(order_id: int):
 
 def put_orders(orders: []):
     """ Put orders into the database """
-    #TODO - impliment
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
     except Error as error:
         print(error)
     finally:
         if conn:
+            for order in orders:
+                sql = f"""INSERT INTO Orders
+                          (OrderID, Name, Address, PostCode, Email, ItemId, OrderStatus) 
+                          VALUES 
+                          (NULL,'{order.customer_name}','{order.customer_address}','{order.post_code}','{order.email}', {order.item.item_id}, '{order.order_status}')"""
+                cur = conn.cursor()
+                cur.execute(sql)
+            conn.commit()
             conn.close()
 
 def get_ready_orders():
@@ -97,7 +103,7 @@ def get_ready_orders():
         print(error)
     finally:
         if conn:
-            sql = 'SELECT * FROM Orders WHERE OrderStatus == Ready'
+            sql = "SELECT * FROM Orders WHERE OrderStatus == 'Ready'"
             cur = conn.cursor()
             cur.execute(sql)
             results = cur.fetchall()
@@ -125,7 +131,7 @@ def get_shipping_orders():
         print(error)
     finally:
         if conn:
-            sql = 'SELECT * FROM Orders WHERE OrderStatus == Shipping'
+            sql = "SELECT * FROM Orders WHERE OrderStatus == 'Shipping'"
             cur = conn.cursor()
             cur.execute(sql)
             results = cur.fetchall()
@@ -144,19 +150,21 @@ def get_shipping_orders():
                 orders.append(order)
     return orders
 
-def update_order_status(id: int, status: str):
-    """ create a database connection to a SQLite database """
-    #TODO - impliment
+def update_order_status(order_id: int, status: str):
+    """ Update an order to have a set status """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
     except Error as error:
         print(error)
     finally:
         if conn:
+            sql = f"UPDATE Orders SET OrderStatus = '{status}' WHERE OrderID == {order_id}"
+            cur = conn.cursor()
+            cur.execute(sql)
+            conn.commit()
             conn.close()
 
 
 if __name__ == '__main__':
-    get_order(1)
+    print('HELLO')
