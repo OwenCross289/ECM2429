@@ -39,10 +39,10 @@ class OrderScreen(MDScreen):
    
 
     def close_screen(self):
+        self.parent.parent.parent.on_pre_enter()
         self.parent.transition.direction = "down"
         self.parent.current = "ListScreen"
-
-   
+        
     def add_to_shipping(self):
         if self.order.item.stock > 0 and self.order.order_status == 'Ready':
             db.decrement_item_stock(self.order.item.item_id)

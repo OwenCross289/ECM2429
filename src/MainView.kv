@@ -27,11 +27,8 @@ MDBoxLayout:
                     toolbar.title = "Picking List"
 
             MDNavigationRailItem:
-                icon: "cube-send"
-                #text: "Prepare the shipment" #a packing list to include in shipment 
-                on_release: 
-                    screen_manager.current = "ShippingListScreen"
-                    toolbar.title = "Shipping List"
+                icon: "cube-send" 
+                on_release: app.navigate_to_shipping(screen_manager, toolbar)
 
             MDNavigationRailItem:
                 icon: "printer"

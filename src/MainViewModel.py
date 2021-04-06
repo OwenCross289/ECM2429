@@ -32,5 +32,10 @@ class MainViewModel(MDApp):
     def show_home(self, screen_manager):
         screen_manager.current = "HomeScreen"
 
+    def navigate_to_shipping(self, screen_manager, toolbar):
+        screen_manager.current = "ShippingListScreen"
+        screen_manager.get_screen("ShippingListScreen").on_pre_enter()
+        toolbar.title = "Shipping List"
+
 
 MainViewModel().run()
