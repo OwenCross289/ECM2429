@@ -5,8 +5,7 @@ import os
 class Order:
 
     def __init__(self, order_id: int, customer_name: str, customer_address: str, post_code: str, email: str, item: Item, order_status: str):
-        '''It will be called when you click on the file name
-        or the catalog selection button.
+        '''Data represnation of a customer order
         :param order_id: int: ID of Order in database
         :param customer_name: str: Name of customer who placed order
         :param customer_address: str: Address of customer who placed order

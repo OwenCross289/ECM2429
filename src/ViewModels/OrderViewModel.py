@@ -9,11 +9,13 @@ from Models.Item import Item
 import Database.DatabaseHandler as db
 
 class OrderScreen(MDScreen):
+    '''ViewModel for OrderView
+    '''
     order_id = NumericProperty(1)
     order = ObjectProperty()
 
     def on_pre_enter(self):
-        '''Called when the view is opened 
+        '''Called when the view is opened
         '''
         self.order = db.get_order(self.order_id)
         self.set_order_labels()

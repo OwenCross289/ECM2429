@@ -1,13 +1,15 @@
-from kivy.properties import BooleanProperty
 from kivymd.uix.list import ThreeLineListItem
 from kivymd.uix.screen import MDScreen
-from kivymd.toast import toast
 from Models.Order import Order
 import Database.DatabaseHandler as db
 
 class ShippingListScreen(MDScreen):
+    '''ViewModel for ShippingListView 
+    '''
 
     def on_pre_enter(self):
+        '''Called when view is navigated to
+        '''
         orders = db.get_shipping_orders()
         self.ids.shipping_list.clear_widgets()
         for order in orders:

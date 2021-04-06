@@ -20,19 +20,26 @@ for kv_file in os.listdir(KV_DIR):
         Builder.load_string(kv.read())
 
 class MainViewModel(MDApp):
-
+    '''ViewModel for MainView
+    '''
 
     def build(self):
+        '''Builds the appplication
+        '''
         self.title = 'ECM2429 Assignment'
         self.theme_cls = ThemeManager()
         self.theme_cls.theme_style = "Light" #"Light" / "Dark"
         return Builder.load_file("MainView.kv")
     
 
-    def show_home(self, screen_manager):
+    def navigate_home(self, screen_manager):
+        '''Navigates to HomeScreen
+        '''
         screen_manager.current = "HomeScreen"
 
-    def navigate_to_shipping(self, screen_manager, toolbar):
+    def navigate_shipping(self, screen_manager, toolbar):
+        '''Navigates to ShippingListView
+        '''
         screen_manager.current = "ShippingListScreen"
         screen_manager.get_screen("ShippingListScreen").on_pre_enter()
         toolbar.title = "Shipping List"

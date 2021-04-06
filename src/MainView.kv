@@ -11,7 +11,7 @@ MDBoxLayout:
         id: toolbar
         title: app.title
         md_bg_color: app.theme_cls.primary_color
-        left_action_items: [["home", lambda x: app.show_home(screen_manager)]]
+        left_action_items: [["home", lambda x: app.navigate_home(screen_manager)]]
 
     MDBoxLayout:
         MDNavigationRail:
@@ -28,7 +28,7 @@ MDBoxLayout:
 
             MDNavigationRailItem:
                 icon: "cube-send" 
-                on_release: app.navigate_to_shipping(screen_manager, toolbar)
+                on_release: app.navigate_shipping(screen_manager, toolbar)
 
             MDNavigationRailItem:
                 icon: "printer"
