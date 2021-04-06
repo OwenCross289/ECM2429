@@ -2,6 +2,7 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 
 #: import PickingListView ViewModels.PickingListViewModel.PickingListScreen
+#: import ShippingListView ViewModels.ShippingListViewModel.ShippingListScreen
 
 MDBoxLayout:
     orientation: "vertical"
@@ -29,7 +30,7 @@ MDBoxLayout:
                 icon: "cube-send"
                 #text: "Prepare the shipment" #a packing list to include in shipment 
                 on_release: 
-                    screen_manager.current = "SendScreen"
+                    screen_manager.current = "ShippingListScreen"
                     toolbar.title = "Shipping List"
 
             MDNavigationRailItem:
@@ -65,10 +66,8 @@ MDBoxLayout:
                 PickingListScreen:
                     name: "PickingListScreen"
 
-                Screen:
-                    name: "SendScreen"
-                    MDLabel:
-                        text: "Send Screen"
+                ShippingListScreen:
+                    name: "ShippingListScreen"
 
                 Screen:
                     name: "PrintScreen"

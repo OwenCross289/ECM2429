@@ -1,0 +1,14 @@
+#:kivy 2.0.0
+#: import OrderView ViewModels.OrderViewModel.OrderScreen
+<ShippingListScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        
+        MDLabel:
+            text: "On this screen you can see all of the orders with the status 'Shipping'. This is all the orders to be included in the shipment"
+            size_hint_y: 0.1
+
+        ScrollView:
+            MDList:
+                id: shipping_list
