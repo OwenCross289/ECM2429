@@ -1,9 +1,11 @@
+import os
 from kivy.properties import NumericProperty, ObjectProperty
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
+from kivymd.uix.filemanager import MDFileManager
+from functools import partial
 from Models.Order import Order
 from Models.Item import Item
-from functools import partial
 import Database.DatabaseHandler as db
 
 class OrderScreen(MDScreen):
@@ -11,12 +13,21 @@ class OrderScreen(MDScreen):
     order = ObjectProperty()
 
     def on_pre_enter(self):
+        '''Called when the view is opened 
+        '''
         self.order = db.get_order(self.order_id)
         self.set_order_labels()
         self.set_item_labels()
+        self.file_manager = MDFileManager(
+            exit_manager=self.exit_manager,
+            select_path=self.select_path,
+            preview=True,
+        )
 
 
     def set_order_labels(self):
+        '''Sets the lables of the order based on the order property
+        '''
         self.ids.order_id_lbl.text = f"Order Number: {self.order.order_id}"
         self.ids.order_name_lbl.text = f"Customer Name: {self.order.customer_name}"
         self.ids.order_address_lbl.text = f"Customer Street: {self.order.customer_address}"
@@ -26,6 +37,8 @@ class OrderScreen(MDScreen):
   
 
     def set_item_labels(self):
+        '''Sets the lables of the item based on the order property
+        '''
         self.ids.item_id_lbl.text = f"Item ID: {self.order.item.item_id}"
         self.ids.item_name_lbl.text = f"Item: {self.order.item.item_name}"
         self.ids.item_price_lbl.text = f"Price: {self.order.item.price}"
@@ -39,11 +52,17 @@ class OrderScreen(MDScreen):
    
 
     def close_screen(self):
+        '''Will close the OrderView and navigate back to
+        the PickingListView
+        '''
         self.parent.parent.parent.on_pre_enter()
         self.parent.transition.direction = "down"
         self.parent.current = "ListScreen"
         
     def add_to_shipping(self):
+        '''Changes items status to 'Shipping' if the item is in stock and
+        the current status is 'Ready'
+        '''
         if self.order.item.stock > 0 and self.order.order_status == 'Ready':
             db.decrement_item_stock(self.order.item.item_id)
             db.update_order_status(self.order.order_id, "Shipping")
@@ -55,3 +74,26 @@ class OrderScreen(MDScreen):
             toast("This item is out of stock and cannot be added to shipping")
         elif self.order.order_status != 'Ready':
             toast("This item has already been added to the shipping list")
+
+    def print_address_label(self):
+        '''Will open up file dialog to get location of PDF then
+        print it if one is selected via the select_path callback
+        '''
+        self.file_manager.show(os.path.expanduser("~")) # output manager to the screen at the home directory
+
+
+    def select_path(self, path):
+        '''It will be called when you click on the file name
+        or the catalog selection button.
+        :type path: str;
+        :param path: path to the selected directory or file;
+        '''
+
+        self.exit_manager()
+        self.order.print_pdf(path)
+
+    def exit_manager(self, *args):
+        '''Called when the user reaches the root of the directory tree.'''
+
+        self.manager_open = False
+        self.file_manager.close()
