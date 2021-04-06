@@ -13,7 +13,7 @@ class Order:
         :param post_code: int: Post code of customer who placed order
         :param email: str: email of customer who placed order
         :param item: Item: Item the customer has ordered
-        :param order_status: str: Staus of order, should only be 'Ready' or 'Shipping'
+        :param order_status: str: Status of order, should only be 'Ready' or 'Shipping'
         '''
         self.order_id = order_id
         self.customer_name = customer_name

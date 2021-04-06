@@ -36,7 +36,9 @@ def get_orders():
     return orders
 
 def get_item(item_id: int):
-    """ Get item from item ID """
+    """ Get item from item ID 
+    :param item_id: int: ID of item in database
+    """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -53,7 +55,9 @@ def get_item(item_id: int):
     return item
 
 def get_order(order_id: int):
-    """ Get order from OrderID """
+    """ Get order from OrderID 
+    :param item_id: int: ID of order in database
+    """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -76,7 +80,9 @@ def get_order(order_id: int):
     return Order(order_id, name, address, post_code, email, item, status)
 
 def put_orders(orders: []):
-    """ Put orders into the database """
+    """ Put orders into the database 
+    :param orders: Order[]: List of orders to be added to the database
+    """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -151,7 +157,10 @@ def get_shipping_orders():
     return orders
 
 def update_order_status(order_id: int, status: str):
-    """ Update an order to have a set status """
+    """ Update an order to have a set status 
+    :param order_id: int: ID of order in database
+    :param status: str: new status
+    """
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -166,7 +175,9 @@ def update_order_status(order_id: int, status: str):
             conn.close()
 
 def decrement_item_stock(item_id: int):
-    """ Reduces stock of item by one if greater than 0 """
+    """ Reduces stock of item by one if greater than 0 
+    :param item_id: int: ID of item in database
+    """
     item = get_item(item_id)
     if item.stock > 0:
         conn = None
@@ -181,6 +192,3 @@ def decrement_item_stock(item_id: int):
                 cur.execute(sql)
                 conn.commit()
                 conn.close()
-
-if __name__ == '__main__':
-    print('HELLO')
