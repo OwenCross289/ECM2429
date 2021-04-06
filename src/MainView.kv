@@ -23,14 +23,14 @@ MDBoxLayout:
                 on_release: 
                     screen_manager.transition.direction = "right"
                     screen_manager.current = "PickingListScreen"
-                    toolbar.title = "Orders to be Picked"
+                    toolbar.title = "Picking List"
 
             MDNavigationRailItem:
                 icon: "cube-send"
                 #text: "Prepare the shipment" #a packing list to include in shipment 
                 on_release: 
                     screen_manager.current = "SendScreen"
-                    toolbar.title = "Orders to be Shipped"
+                    toolbar.title = "Shipping List"
 
             MDNavigationRailItem:
                 icon: "printer"

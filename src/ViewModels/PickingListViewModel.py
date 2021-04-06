@@ -24,5 +24,8 @@ class PickingListScreen(MDScreen):
         toast("Current ready orders have been refreshed")
 
     def navigate_to_item_screen(self, order_id, *args):
+        self.ids.screen_manager.transition.direction = "up"
+        self.ids.screen_manager.get_screen('OrderScreen').order_id = order_id
+        self.ids.screen_manager.current = "OrderScreen"
         toast(f"You clicked order with ID {order_id}")
    

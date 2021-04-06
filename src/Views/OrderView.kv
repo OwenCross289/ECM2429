@@ -1,0 +1,76 @@
+#:kivy 2.0.0
+<OrderScreen>:
+    MDGridLayout:
+        rows: 3
+        spacing: 50, 0
+        padding: 20, 20
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+        
+            MDLabel:
+                id: screen_descriptor
+                text: "On this screen you can see the details of the order selected. Once you have picked the item and put it in the shipping container. Click add to shipping."
+
+            MDFloatingActionButton:
+                icon: "close"
+                on_press: root.close_screen() 
+
+        MDGridLayout:
+            cols: 2
+            size_hint_y: 0.8
+
+            MDBoxLayout:
+                orientation: "vertical"
+                valign: 'top'
+                halign: 'left'
+
+                MDLabel:
+                    id: order_id_lbl
+                MDLabel:
+                    id: order_name_lbl
+                MDLabel:
+                    id: order_address_lbl
+                MDLabel:
+                    id: order_post_code_lbl
+                MDLabel:
+                    id: order_email_lbl
+                MDLabel:
+                    id: order_status_lbl
+            
+            MDBoxLayout:
+                orientation: "vertical"
+                valign: 'top'
+                halign: 'left'
+
+                MDLabel:
+                    id: item_id_lbl
+                MDLabel:
+                    id: item_name_lbl
+                MDLabel:
+                    id: item_price_lbl
+                MDLabel:
+                    id: item_location_lbl
+                MDLabel:
+                    id: item_stock_lbl
+        
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            spacing: 50
+            padding: 5
+
+            MDRaisedButton:
+                id: send_shipping_button
+                text: "Add to shipping"
+                on_press: root.add_to_shipping()
+            
+            MDRaisedButton:
+                id: print_adress_label_button
+                text: "Print Address Label"
+
+
+            MDRaisedButton:
+                id: set_personalised_email_message
+                text: "Set Personal Email message"

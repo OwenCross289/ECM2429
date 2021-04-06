@@ -165,6 +165,22 @@ def update_order_status(order_id: int, status: str):
             conn.commit()
             conn.close()
 
+def decrement_item_stock(item_id: int):
+    """ Reduces stock of item by one if greater than 0 """
+    item = get_item(item_id)
+    if item.stock > 0:
+        conn = None
+        try:
+            conn = sqlite3.connect(db_file)
+        except Error as error:
+            print(error)
+        finally:
+            if conn:
+                sql = f"UPDATE Items SET Stock = {item.stock - 1} WHERE ItemId == {item.item_id}"
+                cur = conn.cursor()
+                cur.execute(sql)
+                conn.commit()
+                conn.close()
 
 if __name__ == '__main__':
     print('HELLO')
