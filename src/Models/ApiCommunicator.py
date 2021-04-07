@@ -4,8 +4,8 @@ from Models.Item import Item
 import Database.DatabaseHandler as db
 
 class ApiCommunicator:
-
-
+    ''' Class for interfacing with the web API
+    '''
     def __init__(self):
         '''Data represnation of a item
         :param item_id: int: ID of Item in database
@@ -18,6 +18,10 @@ class ApiCommunicator:
     
 
     def get_new_orders(self):
+        ''' Queries the API for new orders and add them to the database
+        if it can connect to the API
+        returns: bool: true if success, false if failure
+        '''
         try:
             r = requests.get(self.uri)
             if r:

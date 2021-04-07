@@ -14,6 +14,7 @@ class Order:
         :param item: Item: Item the customer has ordered
         :param order_status: str: Status of order, should only be 'Ready' or 'Shipping'
         '''
+        #These are called customer_ and order_ as to not overwrite name and id of an object
         self.order_id = order_id
         self.customer_name = customer_name
         self.customer_address = customer_address

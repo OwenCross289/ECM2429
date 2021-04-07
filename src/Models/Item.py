@@ -8,6 +8,7 @@ class Item:
         :param warehouse_location: int: Location of item in warehouse
         :param stock: int: Amount of item in warehouse
         '''
+        #These are called item_ as to not overwrite name and id of an object 
         self.item_id = item_id
         self.item_name = item_name
         self.price = price
