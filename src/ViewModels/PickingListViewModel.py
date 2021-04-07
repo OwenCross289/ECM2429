@@ -36,7 +36,7 @@ class PickingListScreen(MDScreen):
         self.ids.refresh_btn.disabled = False
         
         
-
+    #this needs to be done here instead of the ui to pass data to the OrderViewModel (kivy limitations/ poor dependecy injection options in python)
     def navigate_to_item_screen(self, order_id, *args):
         '''Navigates to OrderView
         :param order_id: int: ID of Order in database to be passed to OrderViewModel

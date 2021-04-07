@@ -32,17 +32,38 @@ class MainViewModel(MDApp):
         return Builder.load_file("MainView.kv")
     
 
-    def navigate_home(self, screen_manager):
+    def navigate_home(self, screen_manager, toolbar):
         '''Navigates to HomeScreen
         '''
+        screen_manager.transition.direction = "right"
         screen_manager.current = "HomeScreen"
+        toolbar.title = "Home"
 
     def navigate_shipping(self, screen_manager, toolbar):
         '''Navigates to ShippingListView
         '''
+        screen_manager.transition.direction = "right"
         screen_manager.current = "ShippingListScreen"
         screen_manager.get_screen("ShippingListScreen").on_pre_enter()
         toolbar.title = "Shipping List"
+
+    def navigate_picking(self, screen_manager, toolbar):
+        '''Navigates to ShippingListView
+        '''
+        screen_manager.transition.direction = "right"
+        screen_manager.current = "PickingListScreen"
+        screen_manager.get_screen("PickingListScreen").on_pre_enter()
+        toolbar.title = "Picking List"
+
+    def navigate_generic_email(self, screen_manager, toolbar):
+        '''Navigates to ShippingListView
+        '''
+        screen_manager.transition.direction = "right"
+        screen_manager.current = "EmailScreen"
+        screen_manager.get_screen("EmailScreen").on_pre_enter()
+        toolbar.title = "Generic Email Message"
+        
+
 
 
 MainViewModel().run()

@@ -22,10 +22,7 @@ MDBoxLayout:
             MDNavigationRailItem:
                 icon: "list-status"
                 #text: "Prepare list" #of items to be picked and dispatched"
-                on_release: 
-                    screen_manager.transition.direction = "right"
-                    screen_manager.current = "PickingListScreen"
-                    toolbar.title = "Picking List"
+                on_release: app.navigate_picking(screen_manager, toolbar)
 
             MDNavigationRailItem:
                 icon: "cube-send" 
@@ -34,9 +31,7 @@ MDBoxLayout:
             MDNavigationRailItem:
                 icon: "email"
                 #text: "Prepare e-mail messages" to notify customers of their order status, e.g. posted
-                on_release: 
-                    screen_manager.current = "EmailScreen"
-                    toolbar.title = "Generic Email Message"
+                on_release: app.navigate_generic_email(screen_manager, toolbar)
 
         MDBoxLayout:
             orientation: "vertical"
