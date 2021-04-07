@@ -11,7 +11,7 @@
         
             MDLabel:
                 id: screen_descriptor
-                text: "On this screen you can see the details of the order selected. Once you have picked the item and put it in the shipping container. Click add to shipping."
+                text: "On this screen you can see the details of the order selected. Once you have picked, printed the shipping label and optionally set a custom email. Click 'Add to Shipping'."
 
             MDFloatingActionButton:
                 icon: "close"
@@ -19,7 +19,7 @@
 
         MDGridLayout:
             cols: 2
-            size_hint_y: 0.8
+            size_hint_y: 0.5
 
             MDBoxLayout:
                 orientation: "vertical"
@@ -56,22 +56,39 @@
                     id: item_stock_lbl
         
         MDBoxLayout:
-            orientation: "horizontal"
-            size_hint_y: 0.1
-            spacing: 50
-            padding: 5
+            orientation: "vertical"
+            size_hint_y: 0.4
 
-            MDRaisedButton:
-                id: send_shipping_button
-                text: "Add to shipping"
-                on_press: root.add_to_shipping()
-            
-            MDRaisedButton:
-                id: print_adress_label_button
-                text: "Print Address Label"
-                on_press: root.print_address_label()
+            MDGridLayout:
+                cols: 3
+                spacing: 20
+                padding: 20,0,20,20
+                size_hint_y: 0.8
 
+                MDTextField:
+                    id: custom_email_input
+                    mode: "rectangle"
+                    multiline: True
+                    helper_text: "Enter Custom Email message here"
+                    size_hint_y: 0.7
+                MDLabel:
+                    text: ""
+                    size_hint_x: 0.1
+                MDRaisedButton:
+                    text: "Set Personal Email message"
+                    on_press: root.set_custom_email()
+                
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: 10
+                size_hint_y: 0.2
+                
+                MDRaisedButton:
+                    id: print_adress_label_button
+                    text: "Print Address Label"
+                    on_press: root.print_address_label()
 
-            MDRaisedButton:
-                id: set_personalised_email_message
-                text: "Set Personal Email message"
+                MDRaisedButton:
+                    id: send_shipping_button
+                    text: "Add to shipping"
+                    on_press: root.add_to_shipping()
