@@ -1,9 +1,69 @@
 #:kivy 2.0.0
 <GenericEmailScreen>:
     MDBoxLayout:
-        orientation: "horizontal"
-        size_hint_y: 0.1
-        
+        orientation: "vertical"
         MDLabel:
             id: screen_descriptor
             text: "On this screen you can edit the generic email message sent when an order status has changed"
+            size_hint_y: 0.1
+
+        MDGridLayout:
+            cols: 2
+            rows: 1
+            size_hint_y: 0.8
+            spacing: 10
+            padding: 50,50
+
+            MDBoxLayout:
+                orientation: "vertical"
+                
+                MDTextField:
+                    id: addresser_input
+                    mode: "rectangle"
+                    helper_text: "The addresser goes here. e.g. Dear, Hi"
+                    size_hint_y: 0.125
+
+                MDLabel:    
+                    text: "" 
+                    size_hint_y: 0.025
+                
+                MDTextField:
+                    id: body_input
+                    multiline: True
+                    mode: "rectangle"
+                    helper_text: "What you wish to say to the customer goes here"
+                    size_hint_y: 0.7
+                
+                MDLabel:    
+                    text: "" 
+                    size_hint_y: 0.025
+                
+                MDTextField:
+                    id: sign_off_input
+                    mode: "rectangle"
+                    helper_text: "The sign off goes here. e.g. Many Thanks"
+                    size_hint_y: 0.125
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: 10
+                padding: 50,50
+                
+                MDLabel:
+                    id: email_message
+        
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            padding: 30, 20
+            spacing: 10
+
+            MDRaisedButton:
+                id: update_preview_email_btn
+                text: "Update Preview"
+                on_press: root.update_preview()
+            
+            MDRaisedButton:
+                id: update_generic_email_btn
+                text: "Update Email"
+                on_press: root.update_database()

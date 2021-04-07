@@ -3,6 +3,7 @@ from sqlite3 import Error
 from pathlib import Path
 from Models.Order import Order
 from Models.Item import Item
+from Models.Email import Email
 
 
 db_file = f"{str(Path(__file__).parent)}/ECM2429.db"
@@ -192,3 +193,36 @@ def decrement_item_stock(item_id: int):
                 cur.execute(sql)
                 conn.commit()
                 conn.close()
+
+def get_generic_email_message():
+    """ Gets the generic email message
+    """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as error:
+        print(error)
+    finally:
+        if conn:
+            sql = f"SELECT * FROM GenericEmailMessage"
+            cur = conn.cursor()
+            cur.execute(sql)
+            result = cur.fetchone()
+            conn.close()
+            return Email(result[0], result[1], result[2])
+
+def update_generic_email_message():
+    """ Gets the generic email message
+    """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as error:
+        print(error)
+    finally:
+        if conn:
+            sql = f"UPDATE Items SET Stock = {item.stock - 1} WHERE ItemId == {item.item_id}"
+            cur = conn.cursor()
+            cur.execute(sql)
+            conn.commit()
+            conn.close()
