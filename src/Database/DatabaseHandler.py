@@ -188,9 +188,9 @@ def decrement_item_stock(item_id: int):
             print(error)
         finally:
             if conn:
-                sql = f"UPDATE Items SET Stock = {item.stock - 1} WHERE ItemId == {item.item_id}"
+                sql = "UPDATE Items SET Stock = ? WHERE ItemId == ?"
                 cur = conn.cursor()
-                cur.execute(sql)
+                cur.execute(sql, (item.stock - 1, item.item_id))
                 conn.commit()
                 conn.close()
 
@@ -204,7 +204,7 @@ def get_generic_email_message():
         print(error)
     finally:
         if conn:
-            sql = f"SELECT * FROM GenericEmailMessage"
+            sql = "SELECT * FROM GenericEmailMessage"
             cur = conn.cursor()
             cur.execute(sql)
             result = cur.fetchone()
@@ -222,8 +222,8 @@ def update_generic_email_message(email):
         print(error)
     finally:
         if conn:
-            sql = f"UPDATE GenericEmailMessage SET Addresser = '{email.addresser}', Body = '{email.body}', SignOff = '{email.sign_off}' WHERE Id == {1}"
+            sql = "UPDATE GenericEmailMessage SET Addresser = ?, Body = ?, SignOff = ? WHERE Id == 1"
             cur = conn.cursor()
-            cur.execute(sql)
+            cur.execute(sql, (email.addresser, email.body, email.sign_off))
             conn.commit()
             conn.close()
