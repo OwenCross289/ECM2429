@@ -39,7 +39,7 @@ class OrderScreen(MDScreen):
         self.ids.order_address_lbl.text = f"Customer Street: {self.order.customer_address}"
         self.ids.order_post_code_lbl.text = f"Customer Postcode: {self.order.post_code}"
         self.ids.order_email_lbl.text = f"Customer Email: {self.order.email}"
-        self.ids.order_status_lbl.text = f"Customer status: {self.order.order_status}"
+        self.ids.order_status_lbl.text = f"Order status: {self.order.order_status}"
   
 
     def set_item_labels(self):
