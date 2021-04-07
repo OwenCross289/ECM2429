@@ -1,18 +1,23 @@
 from kivymd.uix.list import ThreeLineListItem
+from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 from Models.Order import Order
+from Models.ApiCommunicator import ApiCommunicator
 from functools import partial
 import Database.DatabaseHandler as db
 
 class PickingListScreen(MDScreen):
     '''ViewModel for PickingListView
     '''
-
+    api_communicator = ApiCommunicator()
     
     def on_pre_enter(self):
         '''Called when view is navigated to
         '''
+        self.update_list()
+        
+    def update_list(self):
         orders = db.get_ready_orders()
         self.ids.picking_list.clear_widgets()
         for order in orders:
@@ -24,8 +29,12 @@ class PickingListScreen(MDScreen):
     def refresh_button_clicked(self):
         '''Calls the API to get more orders
         '''
-        db.update_order_status(1, "Ready")
-        toast("Current ready orders have been refreshed")
+        if self.api_communicator.get_new_orders():
+            self.update_list()
+        else:
+            toast("Failed to connect to API, make sure the correct host as stated in the help is running.")
+        
+        
 
     def navigate_to_item_screen(self, order_id, *args):
         '''Navigates to OrderView
