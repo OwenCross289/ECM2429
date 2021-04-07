@@ -209,10 +209,11 @@ def get_generic_email_message():
             cur.execute(sql)
             result = cur.fetchone()
             conn.close()
-            return Email(result[0], result[1], result[2])
+            return Email(result[1], result[2], result[3])
 
-def update_generic_email_message():
-    """ Gets the generic email message
+def update_generic_email_message(email):
+    """ Sets the generic email message
+    :param email: Email: Email to use
     """
     conn = None
     try:
@@ -221,7 +222,7 @@ def update_generic_email_message():
         print(error)
     finally:
         if conn:
-            sql = f"UPDATE Items SET Stock = {item.stock - 1} WHERE ItemId == {item.item_id}"
+            sql = f"UPDATE GenericEmailMessage SET Addresser = '{email.addresser}', Body = '{email.body}', SignOff = '{email.sign_off}' WHERE Id == {1}"
             cur = conn.cursor()
             cur.execute(sql)
             conn.commit()

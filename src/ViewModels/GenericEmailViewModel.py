@@ -28,5 +28,6 @@ class GenericEmailScreen(MDScreen):
 
     
     def update_database(self):
-        print('Hello')
+        self.update_preview()
+        db.update_generic_email_message(self.email)
         
