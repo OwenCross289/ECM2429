@@ -1,5 +1,4 @@
 from kivymd.uix.list import ThreeLineListItem
-from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 from Models.Order import Order
@@ -29,10 +28,12 @@ class PickingListScreen(MDScreen):
     def refresh_button_clicked(self):
         '''Calls the API to get more orders
         '''
+        self.ids.refresh_btn.disabled = True
         if self.api_communicator.get_new_orders():
             self.update_list()
         else:
             toast("Failed to connect to API, make sure the correct host as stated in the help is running.")
+        self.ids.refresh_btn.disabled = False
         
         
 
