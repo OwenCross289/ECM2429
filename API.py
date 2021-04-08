@@ -4,22 +4,23 @@ import json
 
 host = "localhost"
 port = 8080
-n_orders = 5
-n_people = 10
 
+names = ["Tom Cruise", "David Balne", "Abigail Anderson", "Joel Miller", "Oscar Isaac", "Sarah Taylor", "Janet Mason", "Catherine Jones", "Alice Evans", "Ella Wright", "Logan Brown"]
+adresses = ["12 Waterloo Road","69 Waterfront Plaza","104 Apex Street","76 Grethound Gardens","32 Trynadmere Court","88 Province Islands","72 District Lane","66 Pointer Close","48 Aztec Drive"," 9000 Penny Lane"]
+post_codes = ["IP11 7QE","RH19 2QP","NE16 5SN","CT21 4HJ","EH14 1HH","DL13 1QX","BS10 6UA","WV13 1DO","TS14 6BG","SG4 9DA"]
 
 class OrderToSend:
-    # class variable: records last id, gets incremented in init method
-    last_id = 0
 
     def __init__(self):
-        self.order_id = self.last_id
-        self.name = "Owen"
-        self.address = "Owen Drive"
-        self.item = "Owen item"
-        self.item_price = 69
+        random_index = random.randint(0, 10 - 1)
+        name = names[random_index]
+    
+        self.name = f'{names[random_index]}'
+        self.address = f'{adresses[random_index]}'
+        self.post_code = f'{post_codes[random_index]}'
+        self.email = f'{name.replace(" ", "")}@gmail.com'
+        self.item_id = random.randint(1, 10)
 
-        OrderToSend.last_id += 1
 
 
 class Server(BaseHTTPRequestHandler):
