@@ -7,12 +7,7 @@ class ApiCommunicator:
     ''' Class for interfacing with the web API
     '''
     def __init__(self):
-        '''Data represnation of a item
-        :param item_id: int: ID of Item in database
-        :param item_name: str: Name of item
-        :param price: float: Price of item in GBP
-        :param warehouse_location: int: Location of item in warehouse
-        :param stock: int: Amount of item in warehouse
+        '''Interface for the API 
         '''
         self.uri = 'http://localhost:8080'
     
